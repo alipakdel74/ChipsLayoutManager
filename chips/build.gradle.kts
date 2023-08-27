@@ -1,10 +1,24 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
+publishing {
+    publications {
+        register<MavenPublication>("release") {
+            groupId = "com.app-library"
+            artifactId = "app-library"
+            version = "1.0"
 
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
 android {
     namespace = "library.chips"
+
 
     compileSdk = 34
 
