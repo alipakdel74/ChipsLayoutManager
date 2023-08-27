@@ -3,15 +3,17 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("maven-publish")
 }
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            groupId = "com.app-library"
-            artifactId = "app-library"
-            version = "1.0"
+afterEvaluate{
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.app-library"
+                artifactId = "app-library"
+                version = "1.0"
 
-            afterEvaluate {
-                from(components["release"])
+                afterEvaluate {
+                    from(components["release"])
+                }
             }
         }
     }
@@ -31,7 +33,7 @@ android {
     }
 
     buildTypes {
-        getByName("release") {
+        release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
