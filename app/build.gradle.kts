@@ -5,10 +5,34 @@ plugins {
 
 android {
     namespace = "library.chipslayoutmanager"
+
+    compileSdk = 34
+
     defaultConfig {
+        minSdk = 21
         applicationId = "library.chipslayoutmanager"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables { useSupportLibrary = true }
     }
-    buildFeatures.buildConfig = true
+
+    buildTypes {
+        getByName("release") {
+            isMinifyEnabled = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    (this as ExtensionAware).configure<org.jetbrains.kotlin.gradle.dsl.KotlinJvmOptions> {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
