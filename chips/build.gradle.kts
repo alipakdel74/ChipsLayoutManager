@@ -3,21 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("maven-publish")
 }
-afterEvaluate{
-    publishing {
-        publications {
-            register<MavenPublication>("release") {
-                groupId = "com.app-library"
-                artifactId = "app-library"
-                version = "1.0"
-
-                afterEvaluate {
-                    from(components["release"])
-                }
-            }
-        }
-    }
-}
 android {
     namespace = "library.chips"
 
@@ -59,4 +44,19 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+}
+afterEvaluate{
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "github.com.alipakdel74"
+                artifactId = "chips"
+                version = "1.0"
+
+                afterEvaluate {
+                    from(components["release"])
+                }
+            }
+        }
+    }
 }
